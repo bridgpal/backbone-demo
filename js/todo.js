@@ -63,8 +63,21 @@ var AppView = Backbone.View.extend({
   },
   initialize: function() {
     this.input = this.$('#new-todo');
+    this.counter = this.$('#counter');
     this.listenTo(Todos, 'add', this.appendTodo);
+    this.listenTo(Todos, 'all', this.render);
     Todos.fetch();
+  },
+  counterTemplate: _.template(
+    '<div class="todo-count">\
+    <%= completed %> completed  </div>\
+    <%= incomplete %> not completed .\
+    </div>'
+  ),
+  render: function() {
+    var completed = Todos.completed().length;
+    var incomplete = Todos.incomplete().length;
+    this.counter.html(this.counterTemplate({completed: completed, incomplete: incomplete}));
   },
   appendTodo: function(todo) {
     var view = new TodoView({model: todo});
