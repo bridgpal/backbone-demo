@@ -70,8 +70,8 @@ var AppView = Backbone.View.extend({
   },
   counterTemplate: _.template(
     '<div class="todo-count">\
-    <%= completed %> completed  </div>\
-    <%= incomplete %> not completed .\
+    <%= completed %> completed. \
+    <%= incomplete %> not completed.\
     </div>'
   ),
   render: function() {
